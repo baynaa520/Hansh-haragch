@@ -1,13 +1,4 @@
-fastapi
-uvicorn
-anthropic
+streamlit
 requests
-beautifulsoup4
-lxml
 pandas
-plotly
-python-dotenv
-streamlit
-pydantic
-streamlit
 plotly
