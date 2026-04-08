@@ -18,9 +18,7 @@ _pkgs = {"streamlit": "streamlit", "requests": "requests",
 for mod, pkg in _pkgs.items():
     try:
         __import__(mod)
-    except ImportError:
-        subprocess.check_call([sys.executable, "-m", "pip", "install", pkg, "-q"])
-
+   
 import streamlit as st
 import requests
 import pandas as pd
