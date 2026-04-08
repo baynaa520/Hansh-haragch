@@ -1,0 +1,81 @@
+# 💱 Монгол Валютын Ханш — Full Stack
+
+**FastAPI Backend + Streamlit Frontend + Claude AI**
+
+```
+mongolian-exchange-rate/
+├── main.py            ← FastAPI backend (API сервер)
+├── app.py             ← Streamlit frontend (вэб UI)
+├── requirements.txt   ← Хамааралт номын санг
+├── .env               ← API key (git-д оруулахгүй!)
+├── .env.example       ← Загвар
+└── README.md
+```
+
+---
+
+## 🚀 Ажиллуулах (2 алхам)
+
+### 1. Суулгах
+```bash
+pip install -r requirements.txt
+```
+
+### 2. .env файл үүсгэх
+```bash
+# .env.example-г хуулах
+copy .env.example .env      # Windows
+cp .env.example .env        # Mac/Linux
+
+# Дараа нь .env файлд API key-г оруулна:
+# ANTHROPIC_API_KEY=sk-ant-...
+```
+
+### 3. Backend эхлүүлэх (1-р терминал)
+```bash
+uvicorn main:app --reload --port 8000
+```
+→ http://localhost:8000/docs — Swagger UI нээгдэнэ
+
+### 4. Frontend эхлүүлэх (2-р терминал)
+```bash
+streamlit run app.py
+```
+→ http://localhost:8501 — Streamlit UI нээгдэнэ
+
+---
+
+## 📡 API Endpoint-ууд
+
+| Method | Endpoint | Тайлбар |
+|--------|----------|---------|
+| GET | `/` | API мэдээлэл |
+| GET | `/rates/{date}` | Бүх валютын ханш |
+| GET | `/rates/{date}/{currency}` | Нэг валютын ханш |
+| GET | `/history/{currency}` | Ханшийн түүх |
+| GET | `/convert` | Валют хөрвүүлэх |
+| POST | `/analyze` | Claude AI зөвлөмж |
+| GET | `/analyze/quick/{currency}` | Хурдан AI зөвлөмж |
+| GET | `/health` | Системийн байдал |
+| GET | `/currencies` | Дэмжигдэх валютууд |
+
+---
+
+## 💡 Жишээ хүсэлтүүд
+
+```bash
+# Өнөөдрийн бүх ханш
+curl http://localhost:8000/rates/2026-04-08
+
+# USD ханш
+curl http://localhost:8000/rates/2026-04-08/USD
+
+# 30 хоногийн түүх
+curl http://localhost:8000/history/USD?days=30
+
+# Хөрвүүлэх
+curl "http://localhost:8000/convert?from=USD&to=MNT&amount=100&date=2026-04-08"
+
+# Системийн байдал
+curl http://localhost:8000/health
+```
